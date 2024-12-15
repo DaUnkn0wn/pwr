@@ -45,9 +45,10 @@ echo $password | sudo tee password
 
 SERVER_IP=$(hostname -I | awk '{print $1}')
 
-# Run the validator with nohup
-nohup sudo java -jar validator.jar password $SERVER_IP --loop-udp-test > validator.log 2>&1 &
+# Start the validator in a screen session
+screen -dmS pwr sudo java -jar validator.jar password $SERVER_IP --loop-udp-test
 
-echo "Validator node is now running in the background with nohup."
+echo "Validator node is now running in the background within the 'screen' session."
+echo "To reattach to the screen session, use: screen -r pwr"
 echo "Logs can be found in validator.log."
 echo "Subscribe: https://t.me/HappyCuanAirdrop"
